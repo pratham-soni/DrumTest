@@ -19,7 +19,7 @@ function audPath (char) {
         default:
             return;
     }
-}
+};
 
 for (var i=0; i<numberOfButtons; i++){
     document.querySelectorAll(".drum")[i].addEventListener("click", function (){
@@ -28,10 +28,11 @@ for (var i=0; i<numberOfButtons; i++){
         var audioPath = audPath(buttonPressed);
         
         audioPath = "./sounds/"+audioPath+".mp3";
+        animation(buttonPressed)
         var audio = new Audio(audioPath);
         audio.play();
     });
-}
+};
 
 document.addEventListener("keydown", function (event) {
     var keyPressed = event.key;
@@ -39,6 +40,15 @@ document.addEventListener("keydown", function (event) {
     
     audioPath = "./sounds/"+audioPath+".mp3";
     var audio = new Audio(audioPath);
+    animation(keyPressed)
     audio.play();
+});
 
-})
+function animation(key){
+    var keyToAnimate = document.querySelector("."+key);
+    keyToAnimate.classList.add("pressed");
+
+    setTimeout(() => {
+        keyToAnimate.classList.remove("pressed");
+    }, 100);
+}
